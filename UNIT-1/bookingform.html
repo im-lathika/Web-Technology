@@ -1,0 +1,122 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Book Your Trip | Prime Journey</title> 
+</head> 
+<body> 
+    <!-- Page Title --> 
+    <center> 
+        <h1><i><u>Prime Journey</u></i></h1> 
+        <h2>Book Your Trip     </h2> 
+    </center> 
+    <hr> 
+    <!-- Booking Form --> 
+    <form action="submitbooking.html" method="post"> 
+        <table align="center" cellpadding="10"> 
+            <!-- Full Name --> 
+            <tr> 
+                <td><label for="name">Full Name:</label></td> 
+                <td><input type="text" id="name" name="name" required></td> 
+            </tr> 
+            <!-- Email --> 
+            <tr> 
+                <td><label for="email">Email:</label></td> 
+                <td><input type="email" id="email" name="email" required></td> 
+            </tr> 
+            <!-- Phone Number --> 
+            <tr> 
+                <td><label for="phone">Phone Number:</label></td> 
+                <td><input type="tel" id="phone" name="phone" required></td> 
+            </tr> 
+            <!-- Package Selection --> 
+            <tr> 
+                <td><label for="package">Select Package:</label></td> 
+                <td> 
+                    <select id="package" name="package" required> 
+                        <option value="">--Choose Package--</option> 
+                        <option value="Paris">Romantic Paris</option> 
+                        <option value="Bali">Sunny Bali</option> 
+                        <option value="Switzerland">Switzerland Alps</option> 
+                        <option value="Agra">Agra & Taj Mahal</option> 
+                    </select> 
+                </td> 
+            </tr> 
+            <!-- Number of Travelers --> 
+            <tr> 
+                <td><label for="travelers">Number of Travelers:</label></td> 
+                <td><input type="number" id="travelers" name="travelers" min="1" value="1" required></td> 
+            </tr> 
+            <!-- Travel Dates --> 
+            <tr> 
+                <td><label for="startdate">Start Date:</label></td> 
+                <td><input type="date" id="startdate" name="startdate" required></td> 
+            </tr> 
+            <tr> 
+                <td><label for="enddate">End Date:</label></td> 
+                <td><input type="date" id="enddate" name="enddate" required></td> 
+            </tr> 
+            <!-- Special Requests --> 
+            <tr> 
+                <td><label for="requests">Special Requests:</label></td> 
+                <td><textarea id="requests" name="requests" rows="4" cols="30" placeholder="Any special 
+requests?"></textarea></td> 
+            </tr> 
+            <!-- Payment Details Section --> 
+            <tr> 
+                <td colspan="2" align="center"><h3>      Payment Details</h3></td> 
+            </tr> 
+            <!-- Card Holder Name --> 
+            <tr> 
+                <td><label for="cardname">Card Holder Name:</label></td> 
+                <td><input type="text" id="cardname" name="cardname" required></td> 
+            </tr> 
+ 
+            <!-- Card Number --> 
+            <tr> 
+                <td><label for="cardnumber">Card Number:</label></td> 
+                <td><input type="text" id="cardnumber" name="cardnumber" maxlength="16" required></td> 
+            </tr> 
+ 
+            <!-- Expiry Date --> 
+            <tr> 
+                <td><label for="expiry">Expiry Date (MM/YY):</label></td> 
+                <td><input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required></td> 
+            </tr> 
+            <!-- CVV --> 
+            <tr> 
+                <td><label for="cvv">CVV:</label></td> 
+                <td><input type="password" id="cvv" name="cvv" maxlength="3" required></td> 
+            </tr> 
+
+            <!-- Submit Button --> 
+            <tr> 
+                <td colspan="2" align="center"> 
+                    <button type="submit">Confirm Booking     </button> 
+                </td> 
+            </tr> 
+        </table> 
+    </form> 
+    <br> 
+    <!-- Back Link --> 
+    <center> 
+        <a href="packages.html">⬅ Back to Packages</a> 
+    </center> 
+    <br><br> 
+    <hr> 
+    <!-- Footer --> 
+    <center> 
+        <p>© 2026 Prime Journey. All Rights Reserved.</p> 
+    </center> 
+    <center> 
+            <!--navigation--> 
+            <nav>
+<a href="home2.html">Home🏠</a> |
+<a href="destinationspage.html">Destination📍</a> |
+<a href="packages.html">Package💰</a> |
+<a href="bookingform.html">Booking✈️</a> |
+<a href="reviews.html">Reviews🌟</a> |
+<a href="aboutus2.html">About Us💼</a>
+</nav>
+    </center> 
+</body> 
+</html>
