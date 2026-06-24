@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Elite Cravings</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --gold: #c59d5f;
+            --dark: #0a0a0a;
+            --dark-gray: #151515;
+            --white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; width: 100%; display: flex;
+            justify-content: space-between; align-items: center;
+            padding: 20px 8%; z-index: 1000; background: rgba(0,0,0,0.95);
+            border-bottom: 1px solid rgba(197, 157, 95, 0.2);
+        }
+        .logo { font-family: 'Playfair Display'; font-size: 24px; font-weight: 700; text-decoration: none; color: white; }
+        .logo span { color: var(--gold); }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: var(--white); text-decoration: none; margin-left: 30px; font-size: 14px; transition: 0.3s; }
+        .nav-links li a.active, .nav-links li a:hover { color: var(--gold); }
+
+        /* Hero Section */
+        .about-hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550966842-2849a2210822?w=1920');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+        .about-hero h1 { font-family: 'Playfair Display'; font-size: 4.5rem; }
+        .about-hero h1 span { color: var(--gold); font-style: italic; }
+
+        /* Content Sections */
+        .container { padding: 80px 12%; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
+
+        .image-box { position: relative; }
+        .image-box img { width: 100%; border-radius: 5px; border: 1px solid #333; }
+        .image-box::after {
+            content: ''; position: absolute; top: 20px; left: 20px;
+            width: 100%; height: 100%; border: 2px solid var(--gold);
+            z-index: -1; border-radius: 5px;
+        }
+
+        .text-box h2 { font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 20px; color: var(--gold); }
+        .text-box p { color: var(--text-gray); margin-bottom: 20px; font-size: 1.05rem; }
+
+        /* Stats Section */
+        .stats-bar {
+            background: var(--dark-gray); padding: 60px 0;
+            display: flex; justify-content: space-around; text-align: center;
+            border-top: 1px solid #222; border-bottom: 1px solid #222;
+        }
+        .stat-item h3 { color: var(--gold); font-size: 2.5rem; margin-bottom: 5px; }
+        .stat-item p { text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+
+        /* Chef Highlight */
+        .chef-section { text-align: center; background: #050505; }
+        .chef-card { max-width: 400px; margin: 0 auto; }
+        .chef-card img { width: 100%; border-radius: 50% 50% 0 0; border: 5px solid var(--dark-gray); margin-bottom: 20px; }
+
+        /* Footer */
+        .footer { padding: 40px 10%; background: #050505; text-align: center; border-top: 1px solid #222; }
+        
+        /* Animation */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">ELITE <span>CRAVINGS</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Our Menu</a></li>
+            <li><a href="about.html" class="active">Our Story</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Reservations</a></li>
+        </ul>
+    </nav>
+
+    <header class="about-hero">
+        <div class="reveal">
+            <h1>A Journey of <span>Taste</span></h1>
+            <p style="letter-spacing: 5px; color: var(--gold);">ESTABLISHED 1995</p>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="grid-2 reveal">
+            <div class="text-box">
+                <h2>Our <span>Beginning</span></h2>
+                <p>Elite Cravings started with a simple dream: to bring the art of fine dining to the heart of the city. What began as a small family kitchen in 1995 has now evolved into a sanctuary for food lovers.</p>
+                <p>We believe that food is more than just sustenance; it is a celebration of culture, passion, and the finest ingredients nature has to offer.</p>
+            </div>
+            <div class="image-box">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800" alt="Kitchen History">
+            </div>
+        </div>
+
+        <div class="grid-2 reveal" style="direction: rtl;">
+            <div class="text-box" style="direction: ltr;">
+                <h2>Our <span>Philosophy</span></h2>
+                <p>Quality is at the core of everything we do. We source 100% of our vegetables from our own organic farms, ensuring that every bite you take is fresh and chemical-free.</p>
+                <p>Our chefs spend months perfecting each recipe, blending traditional techniques with modern culinary innovation to create a symphony of flavors.</p>
+            </div>
+            <div class="image-box">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800" alt="Fine Dining">
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-bar reveal">
+        <div class="stat-item">
+            <h3>28+</h3>
+            <p>Years of Experience</p>
+        </div>
+        <div class="stat-item">
+            <h3>15</h3>
+            <p>Master Chefs</p>
+        </div>
+        <div class="stat-item">
+            <h3>100k+</h3>
+            <p>Happy Guests</p>
+        </div>
+        <div class="stat-item">
+            <h3>4</h3>
+            <p>Global Awards</p>
+        </div>
+    </section>
+
+    <section class="container chef-section reveal">
+        <h2 style="font-family:'Playfair Display'; font-size: 3rem; margin-bottom: 50px;">Meet Our <span>Executive Chef</span></h2>
+        <div class="chef-card">
+            <img src="https://images.unsplash.com/photo-1583394293214-28dea15ee548?w=500" alt="Executive Chef">
+            <h3 style="color: var(--gold); font-size: 1.8rem;">Chef Marcus Valen</h3>
+            <p style="color: var(--text-gray); font-style: italic;">"Cooking is a language that speaks to the soul. I don't just make dishes; I craft emotions."</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="logo">ELITE <span>CRAVINGS</span></div>
+        <p style="color: var(--text-gray); font-size: 13px; margin-top: 10px;">&copy; 2026 Elite Cravings. Crafted for Excellence.</p>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+    </script>
+
+</body>
+</html>

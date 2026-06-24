@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | Elite Cravings</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --gold: #c59d5f;
+            --dark: #0a0a0a;
+            --dark-gray: #151515;
+            --white: #ffffff;
+            --text-gray: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark); color: var(--white); overflow-x: hidden; }
+
+        /* Preloader */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--dark); z-index: 9999; display: flex; align-items: center; justify-content: center;
+        }
+        .loader {
+            width: 50px; height: 50px; border: 5px solid #333; border-top-color: var(--gold);
+            border-radius: 50%; animation: spin 1s infinite linear;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; width: 100%; display: flex;
+            justify-content: space-between; align-items: center;
+            padding: 20px 8%; z-index: 1000; background: rgba(0,0,0,0.95);
+            border-bottom: 1px solid rgba(197, 157, 95, 0.2);
+        }
+        .logo { font-family: 'Playfair Display'; font-size: 24px; font-weight: 700; }
+        .logo span { color: var(--gold); }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: var(--white); text-decoration: none; margin-left: 30px; font-size: 14px; transition: 0.3s; }
+        .nav-links li a.active, .nav-links li a:hover { color: var(--gold); }
+
+        /* Header */
+        .menu-header {
+            padding: 150px 0 80px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1920');
+            background-size: cover; background-position: center; text-align: center;
+        }
+        .menu-header h4 { color: var(--gold); letter-spacing: 4px; font-size: 13px; margin-bottom: 10px; }
+        .menu-header h1 { font-family: 'Playfair Display'; font-size: 4rem; }
+        .menu-header h1 span { color: var(--gold); font-style: italic; }
+        .header-line { width: 80px; height: 3px; background: var(--gold); margin: 20px auto; }
+
+        /* Filters */
+        .menu-filters {
+            padding: 30px 10%; background: #0f0f0f; position: sticky; top: 65px; z-index: 900;
+            text-align: center; border-bottom: 1px solid #222;
+        }
+        .filter-btn {
+            background: transparent; border: 1px solid #333; color: var(--white);
+            padding: 10px 25px; margin: 5px; cursor: pointer; transition: 0.4s;
+            border-radius: 2px; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;
+        }
+        .filter-btn.active, .filter-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(197, 157, 95, 0.1); }
+
+        /* Grid */
+        .menu-grid-container { padding: 60px 10%; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+
+        .menu-item { background: var(--dark-gray); border: 1px solid #222; overflow: hidden; transition: 0.5s; }
+        .menu-item:hover { border-color: var(--gold); transform: translateY(-10px); }
+
+        .item-img-box { position: relative; height: 250px; overflow: hidden; }
+        .item-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .menu-item:hover .item-img-box img { transform: scale(1.1); }
+
+        /* Tags */
+        .type-tag { position: absolute; top: 15px; left: 15px; padding: 5px 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; color: white; border-radius: 2px; }
+        .veg { background: #2ecc71; }
+        .non-veg { background: #e74c3c; }
+
+        .item-details { padding: 25px; }
+        .item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .item-head h3 { font-family: 'Playfair Display'; font-size: 1.5rem; }
+        .price { color: var(--gold); font-weight: 600; font-size: 1.2rem; }
+        .item-details p { color: var(--text-gray); font-size: 0.9rem; line-height: 1.6; }
+
+        /* Footer */
+        .footer { padding: 60px 10% 20px; background: #050505; border-top: 1px solid #222; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; margin-bottom: 40px; }
+        .footer h4 { color: var(--gold); margin-bottom: 20px; font-size: 18px; }
+        .footer-bottom { text-align: center; border-top: 1px solid #222; padding-top: 20px; font-size: 13px; color: var(--text-gray); }
+        
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div id="preloader"><div class="loader"></div></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="logo">ELITE <span>CRAVINGS</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html" class="active">Our Menu</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Reservations</a></li>
+        </ul>
+    </nav>
+
+    <header class="menu-header">
+        <h4 class="reveal">CRAFTED WITH PASSION</h4>
+        <h1 class="reveal">Our <span>Exquisite</span> Menu</h1>
+        <div class="header-line reveal"></div>
+    </header>
+
+    <section class="menu-filters">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Dishes</button>
+            <button class="filter-btn" data-filter="starters">Starters</button>
+            <button class="filter-btn" data-filter="main">Main Course</button>
+            <button class="filter-btn" data-filter="desserts">Desserts</button>
+            <button class="filter-btn" data-filter="drinks">Beverages</button>
+        </div>
+    </section>
+
+    <section class="menu-grid-container">
+        <div class="menu-grid" id="menu-container">
+            <div class="menu-item starters reveal">
+                <div class="item-img-box">
+                    <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?w=500" alt="Fries">
+                    <span class="type-tag veg">Veg</span>
+                </div>
+                <div class="item-details">
+                    <div class="item-head"><h3>Truffle Fries</h3><span class="price">$14</span></div>
+                    <p>Double-fried hand-cut potatoes infused with white truffle oil and parmesan cheese.</p>
+                </div>
+            </div>
+
+            <div class="menu-item main reveal">
+                <div class="item-img-box">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500" alt="Steak">
+                    <span class="type-tag non-veg">Non-Veg</span>
+                </div>
+                <div class="item-details">
+                    <div class="item-head"><h3>Wagyu Beef Steak</h3><span class="price">$85</span></div>
+                    <p>A5 Grade Wagyu beef served with garlic butter, sea salt, and red wine reduction.</p>
+                </div>
+            </div>
+
+            <div class="menu-item desserts reveal">
+                <div class="item-img-box">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=500" alt="Cake">
+                    <span class="type-tag veg">Veg</span>
+                </div>
+                <div class="item-details">
+                    <div class="item-head"><h3>Lava Melt Cake</h3><span class="price">$12</span></div>
+                    <p>Warm dark chocolate cake with a molten center, served with vanilla bean gelato.</p>
+                </div>
+            </div>
+
+            <div class="menu-item main reveal">
+                <div class="item-img-box">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" alt="Salmon">
+                    <span class="type-tag non-veg">Non-Veg</span>
+                </div>
+                <div class="item-details">
+                    <div class="item-head"><h3>Atlantic Salmon</h3><span class="price">$38</span></div>
+                    <p>Pan-seared salmon with honey-lemon glaze and sautéed seasonal vegetables.</p>
+                </div>
+            </div>
+
+            <div class="menu-item drinks reveal">
+                <div class="item-img-box">
+                    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500" alt="Cocktail">
+                    <span class="type-tag veg">Veg</span>
+                </div>
+                <div class="item-details">
+                    <div class="item-head"><h3>Signature Mojito</h3><span class="price">$10</span></div>
+                    <p>Fresh lime, garden-picked mint, and premium white rum with a splash of soda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">ELITE <span>CRAVINGS</span></div>
+                <p>Bringing luxury to your table with the finest recipes and ingredients from across the globe.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Visit Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Road, Chennai, TN</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Elite Cravings. Crafted with <i class="fas fa-heart" style="color:var(--gold)"></i></p>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
+            handleReveal();
+        });
+
+        // Filter Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Active Button Class
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                menuItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                        setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => { item.style.display = 'none'; }, 300);
+                    }
+                });
+            });
+        });
+
+        // Scroll Reveal
+        function handleReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - 50) el.classList.add('active');
+            });
+        }
+
+        window.addEventListener('scroll', handleReveal);
+    </script>
+</body>
+</html>

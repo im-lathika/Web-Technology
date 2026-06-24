@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Elite Cravings</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #996515;
+            --black: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--black); 
+            color: #fff; 
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed; top: 0; width: 100%; display: flex;
+            justify-content: space-between; align-items: center;
+            padding: 25px 8%; z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .logo { font-family: 'Playfair Display'; font-size: 26px; font-weight: 700; text-decoration: none; color: white; letter-spacing: 2px; }
+        .logo span { color: var(--gold); }
+        
+        /* --- Header Section --- */
+        .page-header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+        }
+        .page-header h1 { 
+            font-family: 'Playfair Display'; 
+            font-size: clamp(3rem, 10vw, 5rem); 
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .page-header .underline {
+            width: 80px; height: 3px; background: var(--gold); margin: 10px auto;
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-wrapper { padding: 80px 8%; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-card {
+            position: relative;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        /* Cinematic Overlay */
+        .card-content {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 40px 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            transform: translateY(100px);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .gallery-card:hover .card-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.1) rotate(2deg);
+            filter: brightness(0.6);
+        }
+
+        .card-content h3 {
+            font-family: 'Playfair Display';
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .card-content p {
+            font-size: 0.9rem;
+            color: #ccc;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* View Icon */
+        .view-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            width: 50px; height: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #000;
+            opacity: 0;
+            transition: 0.4s;
+        }
+        .gallery-card:hover .view-btn { opacity: 1; transform: rotate(360deg); }
+
+        /* --- Lightbox --- */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98);
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; backdrop-filter: blur(15px);
+        }
+        #lightbox img { 
+            max-width: 85%; max-height: 80vh; 
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+        }
+        .close-lightbox {
+            position: absolute; top: 30px; right: 50px;
+            color: var(--gold); font-size: 3rem; cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-card { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">ELITE <span>CRAVINGS</span></a>
+    </nav>
+
+    <header class="page-header">
+        <p style="letter-spacing: 5px; color: #888;">CULINARY ARTISTRY</p>
+        <h1>Our Gallery</h1>
+        <div class="underline"></div>
+    </header>
+
+    <section class="gallery-wrapper">
+        <div class="gallery-grid">
+            
+            <div class="gallery-card" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800">
+                <div class="view-btn"><i class="fas fa-expand"></i></div>
+                <div class="card-content">
+                    <h3>The Saffron Pasta</h3>
+                    <p>Signature Main Course</p>
+                </div>
+            </div>
+
+            <div class="gallery-card" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1550966842-2849a2210822?w=800">
+                <div class="view-btn"><i class="fas fa-expand"></i></div>
+                <div class="card-content">
+                    <h3>Royal Ambience</h3>
+                    <p>Exquisite Dining Space</p>
+                </div>
+            </div>
+
+            <div class="gallery-card" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800">
+                <div class="view-btn"><i class="fas fa-expand"></i></div>
+                <div class="card-content">
+                    <h3>Golden Mojito</h3>
+                    <p>Premium Mocktails</p>
+                </div>
+            </div>
+
+            <div class="gallery-card" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800">
+                <div class="view-btn"><i class="fas fa-expand"></i></div>
+                <div class="card-content">
+                    <h3>Prime Ribeye</h3>
+                    <p>Oak-Smoked Excellence</p>
+                </div>
+            </div>
+
+            <div class="gallery-card" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800">
+                <div class="view-btn"><i class="fas fa-expand"></i></div>
+                <div class="card-content">
+                    <h3>Chef's Special</h3>
+                    <p>Art on a Plate</p>
+                </div>
+            </div>
+
+            <div class="gallery-card" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800">
+                <div class="view-btn"><i class="fas fa-expand"></i></div>
+                <div class="card-content">
+                    <h3>Vintage Lounge</h3>
+                    <p>Private Celebrations</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img src="" id="lightbox-img">
+    </div>
+
+    <script>
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+    </script>
+
+</body>
+</html>
