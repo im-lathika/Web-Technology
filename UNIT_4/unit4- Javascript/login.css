@@ -1,0 +1,211 @@
+/* login.css - LOGIN PAGE ONLY */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body.login-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* LOGIN CONTAINER */
+.login-container {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 50px 40px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  text-align: center;
+  animation: slideUp 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff88);
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(50px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+}
+
+/* LOGO */
+.login-card .logo {
+  font-size: 36px;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.login-card h2 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: white;
+}
+
+.login-card p {
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+/* TAB BUTTONS */
+.tab-buttons {
+  display: flex;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-btn.active {
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  color: white;
+  box-shadow: 0 5px 15px rgba(0,198,255,0.3);
+}
+
+.tab-btn:hover:not(.active) {
+  color: white;
+  background: rgba(255,255,255,0.1);
+}
+
+/* TAB CONTENT */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* INPUT FIELDS */
+.login-card input {
+  width: 100%;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.login-card input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.login-card input:focus {
+  outline: none;
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 5px 20px rgba(0,198,255,0.3);
+  transform: translateY(-2px);
+}
+
+/* BUTTON */
+.login-card button {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  border: none;
+  color: white;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.login-card button:hover::before {
+  left: 100%;
+}
+
+.login-card button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0,198,255,0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .login-card {
+    margin: 20px;
+    padding: 40px 25px;
+  }
+  
+  .login-card h2 {
+    font-size: 24px;
+  }
+  
+  .tab-btn {
+    padding: 12px;
+    font-size: 15px;
+  }
+  
+  .login-card input, .login-card button {
+    padding: 16px 18px;
+    font-size: 16px;
+  }
+}

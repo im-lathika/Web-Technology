@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – Prime Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep: #0a0e1a;
+      --panel: #111827;
+      --border: rgba(255,255,255,0.08);
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --glow: rgba(56,189,248,0.25);
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--deep);
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* LEFT PANEL */
+    .left-panel {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 60px;
+      overflow: hidden;
+    }
+    .bg-image {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80') center/cover no-repeat;
+      filter: brightness(0.4) saturate(1.2);
+      transform: scale(1.04);
+      animation: panBg 25s ease-in-out infinite alternate;
+    }
+    @keyframes panBg {
+      from { transform: scale(1.04) translateX(0) translateY(0); }
+      to   { transform: scale(1.08) translateX(-2%) translateY(-1%); }
+    }
+    .left-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(10,14,26,0.7) 0%,
+        rgba(10,14,26,0.2) 40%,
+        rgba(10,14,26,0.5) 70%,
+        rgba(10,14,26,0.95) 100%
+      );
+    }
+    .left-content { position: relative; z-index: 1; }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: absolute;
+      top: 0; left: 0;
+    }
+    .brand-mark {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 4px 16px rgba(56,189,248,0.3);
+    }
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: white;
+      letter-spacing: 0.3px;
+    }
+    .left-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.2;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .left-tagline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .left-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 36px;
+    }
+    .destination-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      padding: 7px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(56,189,248,0.3);
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      backdrop-filter: blur(8px);
+      background: rgba(56,189,248,0.08);
+      animation: pillFade 0.8s ease both;
+      cursor: default;
+      transition: all 0.3s;
+    }
+    .pill:hover {
+      background: rgba(56,189,248,0.18);
+      border-color: rgba(56,189,248,0.5);
+      color: white;
+    }
+    .pill:nth-child(1){ animation-delay: 0.1s; }
+    .pill:nth-child(2){ animation-delay: 0.2s; }
+    .pill:nth-child(3){ animation-delay: 0.3s; }
+    .pill:nth-child(4){ animation-delay: 0.4s; }
+    .pill:nth-child(5){ animation-delay: 0.5s; }
+    @keyframes pillFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* STATS ROW */
+    .stats-row {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+    .stat { text-align: left; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* RIGHT PANEL */
+    .right-panel {
+      width: 480px;
+      min-height: 100vh;
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 50px 46px;
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.7s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .right-panel::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .right-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -60px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(129,140,248,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* SCREENS */
+    .screen { display: none; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    .form-header { margin-bottom: 28px; }
+    .form-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .form-header p { font-size: 14px; color: var(--muted); }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 28px;
+      border: 1px solid var(--border);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 9px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      color: var(--muted);
+      background: transparent;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      box-shadow: 0 4px 14px var(--glow);
+    }
+
+    /* FORM CONTENT */
+    .tab-content { display: none; }
+    .tab-content.active { display: flex; flex-direction: column; gap: 15px; }
+
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+    .field input {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .field input::placeholder { color: rgba(100,116,139,0.5); }
+    .field input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
+      background: rgba(56,189,248,0.03);
+    }
+    .field input.error {
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248,113,113,0.1);
+    }
+    .field-error {
+      font-size: 12px;
+      color: #f87171;
+      display: none;
+    }
+    .field-error.show { display: block; }
+
+    /* PW WRAPPER */
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 46px; width: 100%; }
+    .pw-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 16px;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    .pw-toggle:hover { color: var(--accent); }
+
+    .forgot { text-align: right; margin-top: -6px; }
+    .forgot a {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .forgot a:hover { opacity: 0.75; }
+
+    /* SUBMIT */
+    .submit-btn {
+      margin-top: 6px;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.3px;
+    }
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .submit-btn:hover::after { opacity: 1; }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px var(--glow); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn.loading { pointer-events: none; opacity: 0.7; }
+
+    /* DIVIDER */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* SOCIAL */
+    .social-row { display: flex; gap: 12px; }
+    .social-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s;
+    }
+    .social-btn:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-1px);
+    }
+
+    /* STRENGTH BAR */
+    .strength-bar { display: flex; gap: 4px; margin-top: 4px; }
+    .strength-segment {
+      flex: 1; height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.3s;
+    }
+    .strength-segment.weak   { background: #ef4444; }
+    .strength-segment.medium { background: #f59e0b; }
+    .strength-segment.strong { background: #10b981; }
+    .strength-label { font-size: 11px; color: var(--muted); text-align: right; margin-top: 3px; }
+
+    /* CHECKBOX */
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .check-row input[type="checkbox"] {
+      margin-top: 2px;
+      accent-color: var(--accent);
+      width: 15px; height: 15px;
+      cursor: pointer;
+    }
+    .check-row a { color: var(--accent); text-decoration: none; }
+    .check-row a:hover { text-decoration: underline; }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      transform: translateX(140%);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.success { background: #065f46; border: 1px solid #10b981; color: #a7f3d0; }
+    .toast.error   { background: #7f1d1d; border: 1px solid #ef4444; color: #fca5a5; }
+    .toast.info    { background: #1e3a5f; border: 1px solid #38bdf8; color: #bae6fd; }
+
+    /* FORGOT PASSWORD SCREEN */
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 24px;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+
+    .otp-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 8px 0;
+    }
+    .otp-input {
+      width: 52px;
+      height: 56px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .otp-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
+    }
+    .resend-row {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .resend-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .resend-btn:hover { opacity: 0.75; }
+    .resend-btn:disabled { color: var(--muted); cursor: default; opacity: 1; }
+
+    .step-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+    .step-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      transition: all 0.3s;
+    }
+    .step-dot.active {
+      background: var(--accent);
+      width: 22px;
+      border-radius: 4px;
+    }
+    .step-dot.done { background: #10b981; }
+
+    /* SUCCESS ICON */
+    .success-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(16,185,129,0.12);
+      border: 2px solid rgba(16,185,129,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 20px;
+      animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 820px) {
+      .left-panel { display: none; }
+      .right-panel { width: 100%; padding: 40px 30px; }
+    }
+    @media (max-width: 480px) {
+      .right-panel { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- LEFT PANEL -->
+<div class="left-panel">
+  <div class="bg-image"></div>
+  <div class="left-overlay"></div>
+  <div class="brand left-content" style="position:relative; margin-bottom:auto;">
+    <div class="brand-mark">✈</div>
+    <div class="brand-name">Prime Journey</div>
+  </div>
+  <div class="left-content" style="padding-top:60px;">
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">24+</div>
+        <div class="stat-label">Destinations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">12K+</div>
+        <div class="stat-label">Travelers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Avg Rating</div>
+      </div>
+    </div>
+    <h1 class="left-tagline">
+      Your next adventure<br>starts <em>here.</em>
+    </h1>
+    <p class="left-sub">
+      Discover handcrafted travel packages to 24+ destinations across the globe. From serene beaches to majestic mountain getaways.
+    </p>
+    <div class="destination-pills">
+      <span class="pill">🗼 Paris</span>
+      <span class="pill">🏯 Japan</span>
+      <span class="pill">🌴 Maldives</span>
+      <span class="pill">🏔 Kashmir</span>
+      <span class="pill">🌊 Bali</span>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+
+  <!-- SCREEN 1: LOGIN / SIGNUP -->
+  <div class="screen active" id="screenAuth">
+    <div class="form-header">
+      <h2 id="headerTitle">Welcome back</h2>
+      <p id="headerSub">Sign in to manage your bookings & explore packages</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('login', this)">Sign In</button>
+      <button class="tab-btn" onclick="showTab('signup', this)">Create Account</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" class="tab-content active" onsubmit="handleLogin(event)" novalidate>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
+        <span class="field-error" id="loginEmailErr">Enter a valid email address.</span>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="pw-toggle" onclick="togglePw('loginPassword', this)">👁</button>
+        </div>
+        <span class="field-error" id="loginPassErr">Password is required.</span>
+      </div>
+      <div class="forgot"><a href="#" onclick="showScreen('screenForgot'); return false;">Forgot password?</a></div>
+      <button type="submit" class="submit-btn" id="loginBtn">Sign In →</button>
+      <div class="divider">or continue with</div>
+      <div class="social-row">
+        <button type="button" class="social-btn" onclick="socialLogin('Google')">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Google
+        </button>
+        <button type="button" class="social-btn" onclick="socialLogin('Apple')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Apple
+        </button>
+      </div>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" class="tab-content" onsubmit="handleSignup(event)" novalidate>
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="signupName" placeholder="Jane Doe" autocomplete="name">
+        <span class="field-error" id="signupNameErr">Full name is required.</span>
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="signupEmail" placeholder="you@example.com" autocomplete="email">
+        <span class="field-error" id="signupEmailErr">Enter a valid email address.</span>
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="+91 98765 43210" autocomplete="tel">
+        <span class="field-error" id="signupPhoneErr">Enter a valid phone number.</span>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="signupPassword" placeholder="Min. 8 characters" autocomplete="new-password" oninput="checkStrength(this.value)">
+          <button type="button" class="pw-toggle" onclick="togglePw('signupPassword', this)">👁</button>
+        </div>
+        <div class="strength-bar">
+          <div class="strength-segment" id="s1"></div>
+          <div class="strength-segment" id="s2"></div>
+          <div class="strength-segment" id="s3"></div>
+          <div class="strength-segment" id="s4"></div>
+        </div>
+        <div class="strength-label" id="strengthLabel"></div>
+        <span class="field-error" id="signupPassErr">Password must be at least 8 characters.</span>
+      </div>
+      <div class="check-row">
+        <input type="checkbox" id="agreeTerms">
+        <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+      </div>
+      <span class="field-error" id="termsErr">Please accept the terms to continue.</span>
+      <button type="submit" class="submit-btn" id="signupBtn">Create Account →</button>
+    </form>
+  </div>
+
+  <!-- SCREEN 2: FORGOT PASSWORD -->
+  <div class="screen" id="screenForgot">
+    <!-- Step dots -->
+    <div class="step-dots">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
+    </div>
+
+    <!-- Step 1: Enter Email -->
+    <div id="forgotStep1">
+      <button class="back-btn" onclick="showScreen('screenAuth')">← Back to Sign In</button>
+      <div class="form-header">
+        <h2>Forgot Password?</h2>
+        <p>Enter your registered email to receive a reset code</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="forgotEmail" placeholder="you@example.com">
+          <span class="field-error" id="forgotEmailErr">Enter a valid email address.</span>
+        </div>
+        <button class="submit-btn" onclick="sendOTP()">Send Reset Code →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Enter OTP -->
+    <div id="forgotStep2" style="display:none;">
+      <button class="back-btn" onclick="goForgotStep(1)">← Back</button>
+      <div class="form-header">
+        <h2>Enter OTP</h2>
+        <p id="otpSentTo">A 4-digit code was sent to your email</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="otp-row">
+          <input class="otp-input" id="otp1" maxlength="1" type="text" inputmode="numeric">
+          <input class="otp-input" id="otp2" maxlength="1" type="text" inputmode="numeric">
+          <input class="otp-input" id="otp3" maxlength="1" type="text" inputmode="numeric">
+          <input class="otp-input" id="otp4" maxlength="1" type="text" inputmode="numeric">
+        </div>
+        <div class="resend-row">
+          Didn't receive?
+          <button class="resend-btn" id="resendBtn" onclick="resendOTP()">Resend Code</button>
+          <span id="resendTimer" style="display:none;"></span>
+        </div>
+        <button class="submit-btn" onclick="verifyOTP()">Verify Code →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: New Password -->
+    <div id="forgotStep3" style="display:none;">
+      <button class="back-btn" onclick="goForgotStep(2)">← Back</button>
+      <div class="form-header">
+        <h2>New Password</h2>
+        <p>Create a strong new password for your account</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="field">
+          <label>New Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="newPass" placeholder="Min. 8 characters" oninput="checkStrength2(this.value)">
+            <button type="button" class="pw-toggle" onclick="togglePw('newPass', this)">👁</button>
+          </div>
+          <div class="strength-bar">
+            <div class="strength-segment" id="ns1"></div>
+            <div class="strength-segment" id="ns2"></div>
+            <div class="strength-segment" id="ns3"></div>
+            <div class="strength-segment" id="ns4"></div>
+          </div>
+          <div class="strength-label" id="strengthLabel2"></div>
+          <span class="field-error" id="newPassErr">Password must be at least 8 characters.</span>
+        </div>
+        <div class="field">
+          <label>Confirm Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="confirmPass" placeholder="Re-enter password">
+            <button type="button" class="pw-toggle" onclick="togglePw('confirmPass', this)">👁</button>
+          </div>
+          <span class="field-error" id="confirmPassErr">Passwords do not match.</span>
+        </div>
+        <button class="submit-btn" onclick="resetPassword()">Reset Password →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: SUCCESS -->
+  <div class="screen" id="screenSuccess">
+    <div style="text-align:center; padding: 20px 0;">
+      <div class="success-icon">✓</div>
+      <h2 style="font-family:'Playfair Display',serif; color:var(--text); font-size:1.7rem; margin-bottom:10px;">Password Reset!</h2>
+      <p style="color:var(--muted); font-size:14px; margin-bottom:32px; line-height:1.6;">
+        Your password has been updated successfully.<br>You can now sign in with your new password.
+      </p>
+      <button class="submit-btn" onclick="showScreen('screenAuth')" style="max-width:260px; margin:0 auto; display:block;">
+        Go to Sign In →
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /* ── SCREENS ── */
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  /* ── TABS ── */
+  function showTab(tab, btn) {
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tab + 'Form').classList.add('active');
+    btn.classList.add('active');
+    if (tab === 'login') {
+      document.getElementById('headerTitle').textContent = 'Welcome back';
+      document.getElementById('headerSub').textContent = 'Sign in to manage your bookings & explore packages';
+    } else {
+      document.getElementById('headerTitle').textContent = 'Join us today';
+      document.getElementById('headerSub').textContent = 'Create your account and start exploring the world';
+    }
+  }
+
+  /* ── PASSWORD TOGGLE ── */
+  function togglePw(id, btn) {
+    const inp = document.getElementById(id);
+    const isText = inp.type === 'text';
+    inp.type = isText ? 'password' : 'text';
+    btn.textContent = isText ? '👁' : '🙈';
+  }
+
+  /* ── STRENGTH ── */
+  function calcStrength(val) {
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^a-zA-Z0-9]/.test(val)) score++;
+    return score;
+  }
+
+  function applyStrength(val, ids, labelId) {
+    const segs = ids.map(id => document.getElementById(id));
+    const label = document.getElementById(labelId);
+    segs.forEach(s => { s.className = 'strength-segment'; });
+    const score = calcStrength(val);
+    const cls = score <= 1 ? 'weak' : score <= 2 ? 'medium' : 'strong';
+    const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+    for (let i = 0; i < score; i++) segs[i].classList.add(cls);
+    label.textContent = val.length ? (labels[score] || 'Strong') : '';
+  }
+
+  function checkStrength(val)  { applyStrength(val, ['s1','s2','s3','s4'], 'strengthLabel'); }
+  function checkStrength2(val) { applyStrength(val, ['ns1','ns2','ns3','ns4'], 'strengthLabel2'); }
+
+  /* ── VALIDATION ── */
+  function showErr(id, msg) {
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+  function clearErr(id) { document.getElementById(id).classList.remove('show'); }
+  function markInput(id, valid) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('error', !valid);
+  }
+  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function isPhone(v) { return /^[\+\d\s\-\(\)]{8,15}$/.test(v); }
+
+  /* ── TOAST ── */
+  function toast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    const icons = { success: '✓', error: '✕', info: 'ℹ' };
+    t.textContent = (icons[type] || '✓') + '  ' + msg;
+    t.className = 'toast ' + type;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  /* ── LOCAL STORAGE ── */
+  function getAllUsers() {
+    return JSON.parse(localStorage.getItem('primeJourneyUsers') || '[]');
+  }
+  function saveAllUsers(users) {
+    localStorage.setItem('primeJourneyUsers', JSON.stringify(users));
+  }
+  function findUser(email) {
+    return getAllUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
+  }
+  function saveCurrentUser(user) {
+    localStorage.setItem('primeJourneyCurrentUser', JSON.stringify(user));
+  }
+
+  /* ── LOGIN ── */
+  function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass  = document.getElementById('loginPassword').value;
+    let valid = true;
+
+    clearErr('loginEmailErr'); clearErr('loginPassErr');
+
+    if (!isEmail(email)) { showErr('loginEmailErr', 'Enter a valid email address.'); markInput('loginEmail', false); valid = false; }
+    else markInput('loginEmail', true);
+
+    if (!pass) { showErr('loginPassErr', 'Password is required.'); markInput('loginPassword', false); valid = false; }
+    else markInput('loginPassword', true);
+
+    if (!valid) return;
+
+    const btn = document.getElementById('loginBtn');
+    btn.textContent = 'Signing in…';
+    btn.classList.add('loading');
+
+    setTimeout(() => {
+      const user = findUser(email);
+      if (user && user.password === pass) {
+        saveCurrentUser({ ...user, loggedIn: true });
+        toast('Welcome back, ' + user.name.split(' ')[0] + '! 👋', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1200);
+      } else {
+        toast('Invalid email or password.', 'error');
+        btn.textContent = 'Sign In →';
+        btn.classList.remove('loading');
+      }
+    }, 800);
+  }
+
+  /* ── SIGNUP ── */
+  function handleSignup(e) {
+    e.preventDefault();
+    const name  = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const phone = document.getElementById('signupPhone').value.trim();
+    const pass  = document.getElementById('signupPassword').value;
+    const agreed= document.getElementById('agreeTerms').checked;
+    let valid = true;
+
+    ['signupNameErr','signupEmailErr','signupPhoneErr','signupPassErr','termsErr'].forEach(clearErr);
+
+    if (!name) { showErr('signupNameErr', 'Full name is required.'); markInput('signupName', false); valid = false; }
+    else markInput('signupName', true);
+
+    if (!isEmail(email)) { showErr('signupEmailErr', 'Enter a valid email address.'); markInput('signupEmail', false); valid = false; }
+    else markInput('signupEmail', true);
+
+    if (!isPhone(phone)) { showErr('signupPhoneErr', 'Enter a valid phone number.'); markInput('signupPhone', false); valid = false; }
+    else markInput('signupPhone', true);
+
+    if (pass.length < 8) { showErr('signupPassErr', 'Password must be at least 8 characters.'); markInput('signupPassword', false); valid = false; }
+    else markInput('signupPassword', true);
+
+    if (!agreed) { showErr('termsErr', 'Please accept the terms to continue.'); valid = false; }
+
+    if (!valid) return;
+
+    const btn = document.getElementById('signupBtn');
+    btn.textContent = 'Creating account…';
+    btn.classList.add('loading');
+
+    setTimeout(() => {
+      // Check if email already exists
+      if (findUser(email)) {
+        toast('An account with this email already exists.', 'error');
+        showErr('signupEmailErr', 'Email already registered. Please sign in.');
+        markInput('signupEmail', false);
+        btn.textContent = 'Create Account →';
+        btn.classList.remove('loading');
+        return;
+      }
+      const newUser = { name, email, phone, password: pass, joinedAt: new Date().toISOString() };
+      const users = getAllUsers();
+      users.push(newUser);
+      saveAllUsers(users);
+      saveCurrentUser({ ...newUser, loggedIn: true });
+      toast('Account created! Welcome to Prime Journey 🎉', 'success');
+      setTimeout(() => window.location.href = 'index.html', 1400);
+    }, 900);
+  }
+
+  /* ── SOCIAL ── */
+  function socialLogin(provider) {
+    toast(provider + ' login coming soon!', 'info');
+  }
+
+  /* ── FORGOT PASSWORD ── */
+  let generatedOTP = '';
+  let forgotEmailVal = '';
+
+  function goForgotStep(step) {
+    document.getElementById('forgotStep1').style.display = step === 1 ? 'block' : 'none';
+    document.getElementById('forgotStep2').style.display = step === 2 ? 'block' : 'none';
+    document.getElementById('forgotStep3').style.display = step === 3 ? 'block' : 'none';
+    ['dot1','dot2','dot3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      el.className = 'step-dot';
+      if (i + 1 < step) el.classList.add('done');
+      else if (i + 1 === step) el.classList.add('active');
+    });
+  }
+
+  function sendOTP() {
+    const email = document.getElementById('forgotEmail').value.trim();
+    clearErr('forgotEmailErr');
+    if (!isEmail(email)) { showErr('forgotEmailErr', 'Enter a valid email address.'); return; }
+
+    const user = findUser(email);
+    if (!user) {
+      showErr('forgotEmailErr', 'No account found with this email.');
+      return;
+    }
+
+    forgotEmailVal = email;
+    generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+    console.log('OTP (demo):', generatedOTP); // In real app, send via backend
+    toast('OTP sent to ' + email + ' (demo: check console)', 'info');
+    document.getElementById('otpSentTo').textContent = 'Code sent to ' + email.replace(/(.{2}).*@/, '$1***@');
+    goForgotStep(2);
+    startResendTimer();
+  }
+
+  function verifyOTP() {
+    const entered = ['otp1','otp2','otp3','otp4'].map(id => document.getElementById(id).value).join('');
+    if (entered.length < 4) { toast('Please enter the complete 4-digit code.', 'error'); return; }
+    if (entered !== generatedOTP) { toast('Invalid OTP. Please try again.', 'error'); return; }
+    toast('Code verified! Set your new password.', 'success');
+    goForgotStep(3);
+  }
+
+  function resetPassword() {
+    const newPass = document.getElementById('newPass').value;
+    const confirmPass = document.getElementById('confirmPass').value;
+    let valid = true;
+
+    clearErr('newPassErr'); clearErr('confirmPassErr');
+
+    if (newPass.length < 8) { showErr('newPassErr', 'Password must be at least 8 characters.'); valid = false; }
+    if (newPass !== confirmPass) { showErr('confirmPassErr', 'Passwords do not match.'); valid = false; }
+    if (!valid) return;
+
+    // Update password in storage
+    const users = getAllUsers();
+    const idx = users.findIndex(u => u.email.toLowerCase() === forgotEmailVal.toLowerCase());
+    if (idx !== -1) {
+      users[idx].password = newPass;
+      saveAllUsers(users);
+    }
+    showScreen('screenSuccess');
+  }
+
+  /* ── RESEND TIMER ── */
+  let resendInterval;
+  function startResendTimer() {
+    let seconds = 30;
+    const btn = document.getElementById('resendBtn');
+    const timer = document.getElementById('resendTimer');
+    btn.style.display = 'none';
+    timer.style.display = 'inline';
+    timer.textContent = ' (resend in ' + seconds + 's)';
+    resendInterval = setInterval(() => {
+      seconds--;
+      timer.textContent = ' (resend in ' + seconds + 's)';
+      if (seconds <= 0) {
+        clearInterval(resendInterval);
+        btn.style.display = 'inline';
+        timer.style.display = 'none';
+      }
+    }, 1000);
+  }
+
+  function resendOTP() {
+    generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+    console.log('New OTP (demo):', generatedOTP);
+    toast('New code sent! (check console)', 'info');
+    ['otp1','otp2','otp3','otp4'].forEach(id => document.getElementById(id).value = '');
+    startResendTimer();
+  }
+
+  /* ── OTP AUTO-ADVANCE ── */
+  ['otp1','otp2','otp3','otp4'].forEach((id, i, arr) => {
+    document.getElementById(id).addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '').slice(-1);
+      if (this.value && i < arr.length - 1) {
+        document.getElementById(arr[i + 1]).focus();
+      }
+    });
+    document.getElementById(id).addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && !this.value && i > 0) {
+        document.getElementById(arr[i - 1]).focus();
+      }
+    });
+  });
+
+  /* ── AUTO-LOGIN CHECK ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    const current = JSON.parse(localStorage.getItem('primeJourneyCurrentUser') || 'null');
+    if (current && current.loggedIn) {
+      // Pre-fill email for convenience
+      const loginEmail = document.getElementById('loginEmail');
+      if (loginEmail && current.email) loginEmail.value = current.email;
+    }
+  });
+</script>
+</body>
+</html>
