@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Destinations | Prime Journey</title>
+
+    <style>
+        body{
+            margin:0;
+            font-family: "Times New Roman", serif;
+            background-color:#FDE2E4;
+            text-align:center;
+        }
+
+        h1{
+            font-size:38px;
+            font-style: italic;
+            text-decoration: underline;
+            margin-top:20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h2, h3{
+            color:black;
+        }
+
+        @keyframes fadeIn{
+            from{opacity:0; transform:translateY(-20px);}
+            to{opacity:1; transform:translateY(0);}
+        }
+
+        nav{
+            margin-top:10px;
+            animation: slideDown 1.5s ease-in-out;
+        }
+
+        nav a{
+            text-decoration: underline;
+            font-size:18px;
+            margin: 0 5px;
+            color:black;
+            transition:0.3s;
+        }
+
+        nav a:hover{
+            transform:scale(1.1);
+        }
+
+        @keyframes slideDown{
+            from{opacity:0; transform:translateY(-30px);}
+            to{opacity:1; transform:translateY(0);}
+        }
+
+        .package{
+            margin-top:40px;
+        }
+
+        img{
+            margin:10px;
+            border-radius:10px;
+            transition:0.5s;
+            animation: zoomIn 2s ease-in-out;
+        }
+
+        img:hover{
+            transform:scale(1.05);
+        }
+
+        @keyframes zoomIn{
+            from{opacity:0; transform:scale(0.9);}
+            to{opacity:1; transform:scale(1);}
+        }
+
+        button{
+            margin-top:15px;
+            padding:6px 14px;
+            font-weight:bold;
+            border:1px solid black;
+            border-radius:5px;
+            background-color:white;
+            cursor:pointer;
+            transition:0.3s;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        button:hover{
+            background-color:black;
+            color:white;
+            transform:scale(1.1);
+        }
+
+        footer{
+            margin-top:40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Our Destination Packages ✈️</h1>
+
+    <nav>
+        <a href="home2.html">Home🏠</a> |
+        <a href="destinations.html">Destination📍</a> |
+        <a href="packages.html">Package💰</a> |
+        <a href="bookingform.html">Booking details✈️</a> |
+        <a href="reviews.html">Reviews🌟</a> |
+        <a href="aboutus2.html">About Us💼</a>
+    </nav>
+
+    <div class="package">
+        <img src="paris1.jpg" width="300" height="200">
+        <img src="paris2.jpg" width="300" height="200">
+        <img src="paris3.jpg" width="300" height="200">
+        <img src="paris4.jpg" width="300" height="200">
+
+        <h2><b><i>Romantic Paris</i></b></h2>
+        <h3>3 Nights, 4 Days - Includes Eiffel Tower tour and Seine River cruise.</h3>
+
+        <a href="bookingform.html">
+            <button>Book Now</button>
+        </a>
+    </div>
+
+    <div class="package">
+        <img src="bali.jpg" width="300" height="200">
+        <img src="bali1.jpg" width="300" height="200">
+        <img src="bali2.jpg" width="300" height="200">
+        <img src="bali3.webp" width="300" height="200">
+
+        <h2><b><i>Sunny Bali</i></b></h2>
+        <h3>5 Nights, 6 Days - Beach resort stay, island hopping, and spa.</h3>
+
+        <a href="bookingform.html">
+            <button>Book Now</button>
+        </a>
+    </div>
+
+    <div class="package">
+        <img src="switerzerland.jpg" width="300" height="200">
+        <img src="switerzerland1.jpg" width="300" height="200">
+        <img src="switerzerland2.jpg" width="300" height="200">
+        <img src="switerzerland3.jpg" width="300" height="200">
+
+        <h2><b><i>Swiss Adventure</i></b></h2>
+        <h3>7 Nights, 8 Days - Alps tour, ski experience, and chocolate factory visit.</h3>
+
+        <a href="bookingform.html">
+            <button>Book Now</button>
+        </a>
+    </div>
+
+    <div class="package">
+        <img src="agra.jpg" width="300" height="200">
+        <img src="agra1.png" width="300" height="200">
+        <img src="agra2.jpg" width="300" height="200">
+        <img src="agra3.jpg" width="300" height="200">
+
+        <h2><b><i>Taj Mahal Explorer</i></b></h2>
+        <h3>2 Nights, 3 Days - Taj Mahal, Fatehpur Sikri, Red Fort and Agra.</h3>
+
+        <a href="bookingform.html">
+            <button>Book Now</button>
+        </a>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>&copy; 2026 Prime Journey. All Rights Reserved.</p>
+    </footer>
+    
+</body>
+</html>
